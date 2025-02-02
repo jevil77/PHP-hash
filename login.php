@@ -17,7 +17,7 @@
     <h2>Connexion</h2>
     <form action="traitement.php?action=login" method="POST">
         <label for="email">Email</label><br>
-        <input type="email" id="username" name="email" required><br><br>
+        <input type="email" id="email" name="email" required><br><br>
         
         <label for="password">Mot de passe</label><br>
         <input type="password" id="password" name="password" required><br><br>

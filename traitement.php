@@ -24,7 +24,7 @@ if(isset($_GET["action"])) {
                 $user = $requete->fetch();
                 // si l'utilsateur existe
                 if($user) {
-                    header("Location: register.php");
+                    header("Location: register.php"); exit;
                 } else {
                     // var_dump("Utilisateur inexistant"); exit;
                     // Insertion utilisateur en BDD
@@ -44,6 +44,38 @@ if(isset($_GET["action"])) {
                 // problème de saisie dans les champs du formulaire
             }
 
+        break;
+
+        case "login" :
+        // connexion à l'application
+
+        if($POST["submit"]){
+            // connexion à la base de données
+            $pdo = new PDO("mysql:host=localhost;dbname=php_hash;chartset=utf8", "root", "");
+
+            $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
+            $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            if($email && $password) {
+                $requete = $pdo->prepare("SELECT * FROM user WHERE email = :email");
+                $requete->execute(["email => $email"]);
+                $user = $requete->fetch();
+                var_dump($user);die;
+            }
+
+
+        }
+        header("Location: login.php"); exit;
+        break;
+
+
+
+
+
+
+
+
+        case "logout" :
         break;
     }
 }
